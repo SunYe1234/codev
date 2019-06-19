@@ -27,6 +27,13 @@ if(isset($_POST["URL"]))
 	 get_from_url();
 }
 
+if(isset($_POST["color"]))
+	{
+		$color=$_POST["color"];
+		file_put_contents("/opt/lampp/htdocs/wordpress/wp-content/plugins/1100w-hello-word/color.txt",$color);
+	}
+
+
 /* 
 get the JSON data of url obtained from txt using CURL
 */
@@ -100,6 +107,37 @@ function show_table($array)
 	echo "</table>";
 
 }
+/**
+*create a dropdown list in the configuration page to 
+*choose a color for the table 
+*/
+function set_list_color()
+{
+	
+	echo "<h2>choose a color for your table:</h2>"; 
+	echo "<form action=\"admin.php?page=management+de+configuration\" method=\"post\">";
+	echo "<select  name=\"color\" size=\"1\">";
+	echo "<option value=\"#FF5733\" > red";
+	echo "<option value=\"#5D76F5\" > blue";
+	echo "<option value=\"#F3A343\" > yellow";
+	echo "<option value=\"#A4F5C0\" > green";
+	echo "<option value=\"#E4A4F5\" > purple";
+	echo "</select>";
+	echo "<input type=\"submit\" value=\"set color\" name=\"name of button\">";
+	echo "</form>";
+}
+
+/**
+*choose URL of API REST
+*/
+function set_url()
+{
+	echo "<h2>choose your API REST:</h2>\n";
+	echo "<form action=\"admin.php?page=management+de+configuration\" method=\"post\">";
+	echo "<input type=\"text\" name=\"URL\">";
+	echo "<input type=\"submit\" value=\"set url\" name=\"name of button\">";
+	echo "</form>";
+}
 
 
 
@@ -128,11 +166,13 @@ add an item of configuration menu in the configuration page
 function configuration_menu()
 {
 	
-	echo "<h2>page de configuration de plugin IMT</h2>\n";
+	/*echo "<h2>page de configuration de plugin IMT</h2>\n";
 	echo "<form action=\"admin.php?page=management+de+configuration\" method=\"post\">";
 	echo "<input type=\"text\" name=\"URL\">";
 	echo "<input type=\"submit\" value=\"set\" name=\"name of button\">";
-	echo "</form>";
+	echo "</form>";*/
+	set_url();
+	set_list_color();
 }
 
 
